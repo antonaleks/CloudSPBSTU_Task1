@@ -1,0 +1,71 @@
+- hosts: test
+  become: yes
+  become_method: sudo
+  tasks:
+  
+  
+    - name: installing ifconfig
+      apt:
+        name: "net-tools"
+        state: latest
+
+
+    - name: restarting net adapter
+      shell: ifconfig enp0s8 down
+
+
+    - name: installing python3
+      apt: name=python3-pip state=latest
+
+
+    - name: installing flask with pip
+      pip: name=flask state=latest
+
+
+    - name: Update netplan cfg on test server
+      ansible.builtin.template:
+        src: /home/armitage/server_cfg/00-installer-config.yaml
+        dest: /etc/netplan/00-installer-config.yaml
+        owner: root
+        group: root
+        mode: '0644'
+
+
+    - name: netplan apply
+      shell: netplan apply
+
+
+    - name: ifcfg show
+      shell: ifconfig -a
+      register: sh_ifcfg
+
+    - name: debug report
+      debug: var=sh_ifcfg.stdout_lines
+
+
+    - name: copying app on srv
+      ansible.builtin.template:
+        src: /home/armitage/server_cfg/app.py
+        dest: /home/armitage/app.py
+        owner: root
+        group: root
+        mode: '0644'
+
+
+    - name: creating_service
+      ansible.builtin.template:
+        src: /home/armitage/server_cfg/web-server.service
+        dest: /lib/systemd/system/web-server.service
+        owner: root
+        group: root
+        mode: '0644'
+
+
+    - name: reloading daemon and enabling service
+      shell: systemctl daemon-reload
+      shell: systemctl enable web-server
+      shell: systemctl status web-server
+      register: sh_daemon
+
+    - name: service state
+      debug: var=sh_daemon.stdout_lines
