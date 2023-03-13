@@ -1,4 +1,4 @@
-- hosts: test
+- hosts: server
   become: yes
   become_method: sudo
   tasks:
@@ -9,21 +9,17 @@
         name: "net-tools"
         state: latest
 
-
     - name: restarting net adapter
 #      net_interface:
 #        name: enp0s8
 #        state: down
       shell: ifconfig enp0s8 down
 
-
     - name: installing python3
       apt: name=python3-pip state=latest
 
-
     - name: installing flask with pip
       pip: name=flask state=latest
-
 
     - name: Update netplan cfg on test server
       ansible.builtin.template:
@@ -33,10 +29,8 @@
         group: root
         mode: '0644'
 
-
     - name: netplan apply
       shell: netplan apply
-
 
     - name: ifcfg show
       shell: ifconfig -a
@@ -44,7 +38,6 @@
 
     - name: debug report
       debug: var=sh_ifcfg.stdout_lines
-
 
     - name: copying app on srv
       ansible.builtin.template:
@@ -54,7 +47,6 @@
         group: root
         mode: '0644'
 
-
     - name: creating_service
       ansible.builtin.template:
         src: server_cfg/web-server.service
@@ -62,7 +54,6 @@
         owner: root
         group: root
         mode: '0644'
-
 
     - name: reloading daemon and enabling service
       ansible.builtin.systemd:
@@ -90,6 +81,7 @@
           owner: root
           group: root
           mode: '0644'
+
 
 - hosts: gateway
   become: yes
@@ -119,4 +111,24 @@
 #        noflush: true
 #      async: "{{ansible_timeout}}"
 #      poll: 0
+- hosts: client
+  become: yes
+  become_method: sudo
+  tasks:
+
+#    - name: importing script
+#      ansible.builtin.template:
+#        src: client_cfg/curl_test.sh
+#        dest: /home/tolstoy_3
+#        owner: tolstoy_3
+#        group: tolstoy_3
+#        mode: '0744'
+
+    - name: Check that you can connect (GET) to a page and it returns a status 200
+      ansible.builtin.uri:
+        url: http://192.168.7.10:5000/
+
+
+
+
 

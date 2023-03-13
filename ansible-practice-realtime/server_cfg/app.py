@@ -1,6 +1,7 @@
+from urllib import request
 from flask import Flask
-from flask import Flask
-from crypt import methods
+from flask import request
+
 
 
 app = Flask(__name__)
