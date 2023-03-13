@@ -5,12 +5,15 @@
 
 
     - name: installing ifconfig
-      apt:
+      ansible.builtin.apt:
         name: "net-tools"
         state: latest
 
 
     - name: restarting net adapter
+#      net_interface:
+#        name: enp0s8
+#        state: down
       shell: ifconfig enp0s8 down
 
 
@@ -62,9 +65,12 @@
 
 
     - name: reloading daemon and enabling service
-      shell: systemctl daemon-reload
-    - name:
-      shell: systemctl enable web-server
+      ansible.builtin.systemd:
+        state: restarted
+        daemon-reload: true
+        name: web-server
+#      shell: systemctl daemon-reload
+#      shell: systemctl enable web-server
     - name:
       shell: systemctl status web-server
       register: sh_daemon
