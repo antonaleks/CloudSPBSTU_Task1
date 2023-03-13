@@ -1,0 +1,9 @@
+[Unit]
+Description=Web-Server
+[Service]
+Type=idle
+WorkingDirectory=/home/armitage
+ExecStart=python3 app.py
+[Install]
+WantedBy=multi-user.target
+

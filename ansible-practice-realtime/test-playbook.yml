@@ -2,8 +2,8 @@
   become: yes
   become_method: sudo
   tasks:
-  
-  
+
+
     - name: installing ifconfig
       apt:
         name: "net-tools"
@@ -24,7 +24,7 @@
 
     - name: Update netplan cfg on test server
       ansible.builtin.template:
-        src: /home/armitage/server_cfg/00-installer-config.yaml
+        src: server_cfg/00-installer-config.yaml
         dest: /etc/netplan/00-installer-config.yaml
         owner: root
         group: root
@@ -45,7 +45,7 @@
 
     - name: copying app on srv
       ansible.builtin.template:
-        src: /home/armitage/server_cfg/app.py
+        src: server_cfg/app.py
         dest: /home/armitage/app.py
         owner: root
         group: root
@@ -54,7 +54,7 @@
 
     - name: creating_service
       ansible.builtin.template:
-        src: /home/armitage/server_cfg/web-server.service
+        src: server_cfg/web-server.service
         dest: /lib/systemd/system/web-server.service
         owner: root
         group: root
@@ -63,9 +63,54 @@
 
     - name: reloading daemon and enabling service
       shell: systemctl daemon-reload
+    - name:
       shell: systemctl enable web-server
+    - name:
       shell: systemctl status web-server
       register: sh_daemon
 
     - name: service state
       debug: var=sh_daemon.stdout_lines
+
+
+- hosts: client
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: cfg for client host
+      ansible.builtin.template:
+          src: client_cfg/00-installer-config.yaml
+          dest: /etc/netplan/00-installer-config.yaml
+          owner: root
+          group: root
+          mode: '0644'
+
+- hosts: gateway
+  become: yes
+  become_method: sudo
+  tasks:
+
+    - name: import netplan cfg for gateway
+      ansible.builtin.template:
+        src: gateway_cfg/00-installer-config.yaml
+        dest: /etc/netplan/00-installer-config.yaml
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: importing iptables rules
+      ansible.builtin.template:
+        src: gateway_cfg/rules.v4
+        dest: /etc/iptables/rules.v4
+        owner: root
+        group: root
+        mode: '0644'
+
+#    - name: apply rules
+#      community.general.iptables_state:
+#        state: restored
+#        path: /run/iptables.apply
+#        noflush: true
+#      async: "{{ansible_timeout}}"
+#      poll: 0
+

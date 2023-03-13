@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="56126b65-5934-45c6-b2c7-5069308f37c7" name="armitage">
+        <fileTransfer accessType="SFTP" host="192.168.0.128" port="22" sshConfigId="6dcbb8b0-87ec-4d41-b31b-b8de91fafb9a" sshConfig="armitage@192.168.0.128:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+    <groups>
+      <group>
+        <name>ansible</name>
+        <servers>
+          <name value="armitage" />
+        </servers>
+      </group>
+    </groups>
+  </component>
+</project>
