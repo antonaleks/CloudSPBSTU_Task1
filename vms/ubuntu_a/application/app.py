@@ -1,18 +1,21 @@
 from crypt import methods
-from flask import Flask
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route("/", methods=['GET'])
-def hello_world():
-    return "<p>Hello, World!</p>"
 
-@app.route("/", methods=['PUT'])
-def hello_world_put():
-    return "<p>Hello, World!</p>"
+@app.route('/', methods=['GET'])
+def hello():
+    return "\n<p>Hello, World</p>\n"
 
-@app.route("/", methods=['POST'])
-def hello_world_post():
-    return "<p>Hello, World!</p>"
 
-app.run(host='0.0.0.0', port=5000)
+@app.route('/change_login', methods=['PUT'])
+def change_login():
+    return f"\n<p>New Login is {request.form['login']}!</p>\n"
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    return f"\n<p>Your Login us {request.form['login']}!</p>\n"
+
+app.run(host='0.0.0.0', port=5000, debug=True)
