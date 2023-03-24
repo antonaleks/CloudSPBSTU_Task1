@@ -1,2 +1,0 @@
-ansible_ssh_user: armitage
-ansible_ssh_pass: 1337
