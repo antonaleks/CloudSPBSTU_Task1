@@ -1,0 +1,7 @@
+---
+server_net_src: server_cfg/00-installer-config.yaml
+server_net_dest: /etc/netplan/00-installer-config.yaml
+server_app_src: server_cfg/app.py
+server_app_dest: /home/armitage/app.py
+server_service_src: server_cfg/web-server.service
+server_service_dest: /lib/systemd/system/web-server.service
