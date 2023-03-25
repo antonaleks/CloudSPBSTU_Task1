@@ -9,7 +9,7 @@ ip addr
 <br>![img_1.png](Assets/img_1.png)
 После чего на одной из разворачиваем ansible server с помощью команды: <br>
 ``` 
-sudo apt update ansible
+sudo apt update
 sudo apt install ansible
 ```
 Далее подключаемся по sftp к нашему ansible server любым удобным способом и конфигурируем рабочую область следующим образом: <br>
