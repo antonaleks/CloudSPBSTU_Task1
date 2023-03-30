@@ -1,0 +1,3 @@
+---
+client_cfg_src: client_cfg/00-installer-config.yaml
+client_cfg_dest: /etc/netplan/00-installer-config.yaml

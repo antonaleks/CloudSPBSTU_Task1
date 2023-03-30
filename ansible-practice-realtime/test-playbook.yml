@@ -1,0 +1,145 @@
+- hosts: gateway
+  become: yes
+  become_method: sudo
+
+  tasks:
+
+    - name: import netplan cfg for gateway
+      ansible.builtin.template:
+        src: "{{gateway_net_src}}"
+        dest: "{{gateway_net_dest}}"
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: importing iptables rules
+      ansible.builtin.template:
+        src: "{{gateway_rules_src}}"
+        dest: "{{gateway_rules_dest}}"
+        owner: root
+        group: root
+        mode: '0644'
+
+#    - name: apply rules
+#      community.general.iptables_state:
+#        state: restored
+#        path: /run/iptables.apply
+#        noflush: true
+#      async: "{{ansible_timeout}}"
+#      poll: 0
+
+
+- hosts: server
+  become: yes
+  become_method: sudo
+  vars:
+    packages:
+      - net-tools
+      - python3-pip
+
+  tasks:
+
+
+    - name: installing ifconfig
+      ansible.builtin.apt:
+        name: "net-tools"
+        state: latest
+
+    - name: restarting net adapter
+#      net_interface:
+#        name: enp0s8
+#        state: down
+      shell: ifconfig enp0s8 down
+
+    - name: installing python3
+      ansible.builtin.apt:
+        name: 'python3-pip'
+        state: latest
+
+    - name: installing flask with pip
+      pip: name=flask state=latest
+
+    - name: Update netplan cfg on test server
+      ansible.builtin.template:
+        src: "{{server_net_src}}"
+        dest: "{{server_net_dest}}"
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: netplan apply
+      shell: netplan apply
+
+    - name: ifcfg show
+      shell: ifconfig -a
+      register: sh_ifcfg
+
+    - name: debug report
+      debug: var=sh_ifcfg.stdout_lines
+
+    - name: copying app on srv
+      ansible.builtin.template:
+        src: "{{server_app_src}}"
+        dest: "{{server_app_dest}}"
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: creating_service
+      ansible.builtin.template:
+        src: "{{server_service_src}}"
+        dest: "{{server_service_dest}}"
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: reloading daemon and enabling service
+      ansible.builtin.systemd:
+        state: restarted
+        daemon-reload: true
+        name: web-server
+#      shell: systemctl daemon-reload
+#      shell: systemctl enable web-server
+    - name:
+      shell: systemctl status web-server
+      register: sh_daemon
+
+    - name: service state
+      debug: var=sh_daemon.stdout_lines
+
+
+- hosts: client
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: cfg for client host
+      ansible.builtin.template:
+          src: "{{client_cfg_src}}"
+          dest: "{{client_cfg_dest}}"
+          owner: root
+          group: root
+          mode: '0644'
+
+
+- hosts: client
+  become: yes
+  become_method: sudo
+  tasks:
+
+#    - name: importing script
+#      ansible.builtin.template:
+#        src: client_cfg/curl_test.sh
+#        dest: /home/tolstoy_3
+#        owner: tolstoy_3
+#        group: tolstoy_3
+#        mode: '0744'
+
+    - name: Check that you can connect (GET) to a page and it returns a status 200
+      ansible.builtin.uri:
+        url: http://192.168.7.10:5000/
+
+
+
+
+
