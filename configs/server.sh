@@ -7,11 +7,11 @@ ip address add dev macvlan1 192.168.16.10/24
 # Включаем адаптер
 ip link set macvlan1 up
 
-# Проверяем что создалось
-ip a
-
 # Прописываем маршрут сервера к его подсети через шлюз gateway
 ip route add 192.168.9.0/24 via 192.168.16.1
+
+# Проверяем что создалось
+ip a
 
 # Поднимаем веб сервер
 pip install flask
@@ -37,5 +37,4 @@ def hello_world_post():
 app.run(host='0.0.0.0', port=5000)
 EOF
 
-# Запускаем веб сервер
-python3 app.py
+ls -l
