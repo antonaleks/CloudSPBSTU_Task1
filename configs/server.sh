@@ -1,19 +1,22 @@
 #!/bin/bash
 
-# Создаем новый адаптер и связываем его с eth0
+echo '# Создаем новый адаптер и связываем его с eth0'
 ip link add macvlan1 link eth0 type macvlan mode bridge
-# Добавляем ip address адаптеру
+
+echo '# Добавляем ip address адаптеру'
 ip address add dev macvlan1 192.168.16.10/24
-# Включаем адаптер
+
+echo '# Включаем адаптер'
 ip link set macvlan1 up
 
-# Прописываем маршрут сервера к его подсети через шлюз gateway
+echo '# Прописываем маршрут сервера к его подсети через шлюз gateway'
 ip route add 192.168.9.0/24 via 192.168.16.1
 
-# Проверяем что создалось
+echo '# Проверяем что создалось'
 ip a
 
-# Поднимаем веб сервер
+echo '# Поднимаем веб сервер'
+
 pip install flask
 
 cat > app.py << EOF
@@ -37,4 +40,6 @@ def hello_world_post():
 app.run(host='0.0.0.0', port=5000)
 EOF
 
+'# Создался файл app.py'
 ls -l
+cat app.py
