@@ -3,9 +3,13 @@
 IPADDR=192.168.9.101/24
 SUBNET=192.168.17.0/24
 GATEWAY=192.168.8.1
+
 # IPADDR=192.168.9.100/24
 # SUBNET=192.168.16.0/24
 # GATEWAY=192.168.9.1
+
+# s=IPADDR, p=SUBNET, g=GATEWAY
+# Пример вызова ./client.sh -s 192.168.9.100/24 -p 192.168.16.0/24 -g 192.168.9.1
 
 usage() { echo "Usage: $0 [-s] [-p]" 1>&2; exit 1; }
 
@@ -13,7 +17,6 @@ while getopts ":s:p:g:" o; do
     case "${o}" in
         s)
             s=${OPTARG}
-            # ((s == 45 || s == 90)) || usage
             ;;
         p)
             p=${OPTARG}
@@ -22,19 +25,22 @@ while getopts ":s:p:g:" o; do
             g=${OPTARG}
             ;;
         *)
-            # usage
             ;;
     esac
 done
 shift $((OPTIND-1))
 
-if [ -z "${s}" ] || [ -z "${p}" ] || [ -z "${g}"]; then
-    usage
+if [ -n "${s}" ]; then
+    IPADDR=${s}
 fi
 
-IPADDR=${s}
-SUBNET=${p}
-GATEWAY=${g}
+if [ -n "${p}" ]; then
+    SUBNET=${p}
+fi
+
+if [ -n "${g}" ]; then
+    GATEWAY=${g}
+fi
 
 echo "IPADDR = ${IPADDR}"
 echo "SUBNET = ${SUBNET}"

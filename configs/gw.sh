@@ -2,9 +2,12 @@
 
 IPFIRST=192.168.16.1/23
 IPSECOND=192.168.9.1/23
-# IPADDR=192.168.9.100/24
-# SUBNET=192.168.16.0/24
-# GATEWAY=192.168.9.1
+
+# IPFIRST=192.168.16.1/24
+# IPSECOND=192.168.9.1/24
+
+# s=IPFIRST, p=IPSECOND
+# Пример вызова ./gw.sh -s 192.168.16.1/24 -p 192.168.9.1/24
 
 usage() { echo "Usage: $0 [-s] [-p]" 1>&2; exit 1; }
 
@@ -12,24 +15,24 @@ while getopts ":s:p:" o; do
     case "${o}" in
         s)
             s=${OPTARG}
-            # ((s == 45 || s == 90)) || usage
             ;;
         p)
             p=${OPTARG}
             ;;
         *)
-            # usage
             ;;
     esac
 done
 shift $((OPTIND-1))
 
-if [ -z "${s}" ] || [ -z "${p}" ]; then
-    usage
+if [ -n "${s}" ]; then
+    IPFIRST=${s}
 fi
 
-IPFIRST=${s}
-IPSECOND=${p}
+if [ -n "${p}" ]; then
+    IPSECOND=${p}
+fi
+
 
 echo "IPFIRST = ${IPFIRST}"
 echo "IPSECOND = ${IPSECOND}"

@@ -1,5 +1,4 @@
-from flask import Flask
-from flask import request
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -10,11 +9,20 @@ def hello_world():
 
 @app.route("/", methods=['PUT'])
 def hello_world_put():
-    phrase=req
-    return "<p>[PUT]Hello, World, {param}!</p>"
+    content_type = request.headers.get('Content-Type')
+    if (content_type == 'application/json'):
+        json = request.get_json()
+        return json
+    else:
+        return 'Content-Type not supported!'
 
 @app.route("/", methods=['POST'])
 def hello_world_post():
-    return "<p>[POST]Hello, World!</p>"
+    content_type = request.headers.get('Content-Type')
+    if (content_type == 'application/json'):
+        json = request.get_json()
+        return json
+    else:
+        return 'Content-Type not supported!'
 
 app.run(host='0.0.0.0', port=5000)
