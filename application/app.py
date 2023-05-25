@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import request
 
 app = Flask(__name__)
 
@@ -9,7 +10,8 @@ def hello_world():
 
 @app.route("/", methods=['PUT'])
 def hello_world_put():
-    return "<p>[PUT]Hello, World!</p>"
+    phrase=req
+    return "<p>[PUT]Hello, World, {param}!</p>"
 
 @app.route("/", methods=['POST'])
 def hello_world_post():
