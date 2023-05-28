@@ -1,12 +1,16 @@
+IPADDR=192.168.28.10/24
+GETEWAY=192.168.28.1
+SUBNET=192.168.7.0/24
+
 echo 'создаем адаптер тип bridge'
 ip link add macvlan1 link eth0 type macvlan mode bridge 
 echo '# добавляем ему ip'
-ip address add dev macvlan1 192.168.28.10/24 
+ip address add dev macvlan1 $IPADDR
 echo '# включаем адаптер'
 ip link set macvlan1 up 
 
 echo '# маршрут к вм С через вм В'
-ip route add 192.168.7.0/24 via 192.168.28.1 
+ip route add $SUBNET via $GATEWAY
 
 pip install flask
 
