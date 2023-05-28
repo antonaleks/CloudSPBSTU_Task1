@@ -3,6 +3,10 @@ from flask import Flask
 
 app = Flask(__name__)
 
+@app.route("/", methods=['GET'])
+def hello_world():
+    return "<p>[GET]Hello, World!</p>"
+
 @app.route("/", methods=['PUT'])
 def hello_world_put():
     content_type = request.headers.get('Content-Type')
