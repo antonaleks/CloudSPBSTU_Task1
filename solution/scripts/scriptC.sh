@@ -10,6 +10,6 @@ echo '# включаем адаптер'
 ip link set macvlan1 up 
 
 echho '# добавляем маршрут к виртуалке А через виртуалку В'
-ip route add $SUBNET viA $GETEWAY 
+ip route add $SUBNET via $GETEWAY 
 
 curl 'http://192.168.28.10:5000/'
