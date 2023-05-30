@@ -1,28 +1,38 @@
 from crypt import methods
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route("/", methods=['GET'])
-def hello_world():
-    return "<p>[GET]Hello, World!</p>"
+students = {
+    'GroupA': ['volodya', 'anton'],
+    'GroupB': ['egor', 'boris']
+}
 
-@app.route("/", methods=['PUT'])
-def hello_world_put():
-    content_type = request.headers.get('Content-Type')
-    if (content_type == 'application/json'):
-        json = request.get_json()
-        return json
-    else:
-        return 'Content-Type not supported!'
+@app.route("/", methods=['GET'])
+def get_students():
+    return students
 
 @app.route("/", methods=['POST'])
-def hello_world_post():
-    content_type = request.headers.get('Content-Type')
-    if (content_type == 'application/json'):
-        json = request.get_json()
-        return json
+def add_student():
+    data = request.get_json()
+    group = data['group']
+    student = data['student']
+    if group in students:
+        students[group].append(student)
     else:
-        return 'Content-Type not supported!'
-    
+        students[group] = [student]
+    return students
+
+@app.route("/", methods=['PUT'])
+def update_student():
+    data = request.get_json()
+    group = data['group']
+    old_student = data['old_student']
+    new_student = data['new_student']
+    if group in students:
+        if old_student in students[group]:
+            index = students[group].index(old_student)
+            students[group][index] = new_student
+    return students
+
     app.run(host='0.0.0.0', port=5000)
