@@ -7,14 +7,14 @@
 Добавим 3 виртуальные машины (см. рис. 1)
 
 <p align="center">
-<img src="images/playwithdocker.png">
+<img width=100% src="images/playwithdocker.png">
 Рисунок 1 - Виртуальные машины в Play-With-Docker
 </p>
 
 Подключимся к ним из своего терминала с использованием ssh соединения (см. рис. 2)
 
 <p align="center">
-<img src="images/vmsinterm.png">
+<img width=100% src="images/vmsinterm.png">
 Рисунок 2 - Подключение к ВМ через терминал
 </p>
 
@@ -26,7 +26,7 @@
     * 192.168.4.100 с маской 255.255.255.0
 
 <p align="center">
-<img src="images/enabledAdaptersAC.png">
+<img width=100% src="images/enabledAdaptersAC.png">
 Рисунок 3 - Адаптеры машин A и C
 </p>
 
@@ -37,7 +37,7 @@
 * 192.168.4.1 с маской 255.255.255.0
 
 <p align="center">
-<img src="images/enabledAdapterB.png">
+<img width=100% src="images/enabledAdapterB.png">
 Рисунок 4 - Адаптер машины B
 </p>
 
@@ -50,6 +50,6 @@
 И машины успешно пингуются :)
 
 <p align="center">
-<img src="images/pingSubnetworks.png">
+<img width=100% src="images/pingSubnetworks.png">
 Рисунок 4 - Пинг между машинами в разных подсетях
 </p>
