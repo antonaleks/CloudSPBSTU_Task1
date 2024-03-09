@@ -36,7 +36,7 @@ case $1 in
          # Server
          a|A)
             ip link add macvlan1 link eth0 type macvlan mode bridge
-            ip address add dev macvlan $node_a_ip/$node_a_mask
+            ip address add dev macvlan1 $node_a_ip/$node_a_mask
             ip link set macvlan1 up
             echo "node A with ip $node_a_ip/$node_a_mask is up"
          ;;
@@ -62,7 +62,7 @@ case $1 in
          # Client
          c|C)
             ip link add macvlan1 link eth0 type macvlan mode bridge
-            ip address add dev macvlan $node_c_ip/$node_c_mask
+            ip address add dev macvlan1 $node_c_ip/$node_c_mask
             ip link set macvlan1 up
             echo "node A with ip $node_c_ip/$node_c_mask is up"
          ;;
