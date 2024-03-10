@@ -1,15 +1,25 @@
 #!/bin/bash
 echo "Configuring adapter for subnet A"
+echo "Creating MacVlan adapter"
 ip link add macvlan1 link eth0 type macvlan mode bridge
+echo "Adapter successfully created"
+
+printf "\nLinking MacVlan adapter to ip address %s\n" "192.168.28.10/24"
 ip address add dev macvlan1 192.168.28.10/24
+echo "Enabling adapter"
 ip link set macvlan1 up
+echo "Adapter enabled"
+
+echo "Routing through %s to %s" "192.168.4.0/24" "192.168.28.1"
 ip route add 192.168.4.0/24 via 192.168.28.1
 
+echo "Installing dependecies for web server (Python Flash)"
 pip install flask
 
+echo "Web server configuration added %s" "app.py"
 touch app.py
 
-cat << EOF > app.py
+cat <<EOF >app.py
 from flask import Flask, request
 app = Flask(__name__)
 
@@ -58,4 +68,6 @@ def getput():
 app.run(host='0.0.0.0', port=5000)
 EOF
 
+echo "Starting web server!"
 python app.py
+
