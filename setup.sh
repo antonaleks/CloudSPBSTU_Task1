@@ -39,6 +39,9 @@ case $1 in
             ip address add dev macvlan1 $node_a_ip/$node_a_mask
             ip link set macvlan1 up
             echo "node A with ip $node_a_ip/$node_a_mask is up"
+            
+            pip install flask
+            python server.py
          ;;
          # Gateway
          b|B)
