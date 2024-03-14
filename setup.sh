@@ -45,6 +45,8 @@ case $1 in
          ;;
          # Gateway
          b|B)
+            apk add perl
+
             echo "Setting up B server side"
             ip link add macvlan1 link eth0 type macvlan mode bridge # создаем новый адаптер с типом bridge и делаем связь адаптера с eth0 
             ip address add dev macvlan1 $node_b_server_ip/$node_b_server_mask # добавляем ip адрес адаптеру
