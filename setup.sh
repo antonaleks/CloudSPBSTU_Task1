@@ -39,6 +39,9 @@ case $1 in
             ip address add dev macvlan1 $node_a_ip/$node_a_mask
             ip link set macvlan1 up
             echo "node A with ip $node_a_ip/$node_a_mask is up"
+
+            echo "Routing server"
+            ip route add $(get_subnet $node_c_ip/$node_c_mask) via $node_b_server_ip
             
             pip install flask
             python server.py
@@ -57,11 +60,6 @@ case $1 in
             ip address add dev macvlan2 $node_b_client_ip/$node_b_client_mask # добавляем ip адрес адаптеру
             ip link set macvlan2 up # включаем адаптер
 
-            echo "Routing server"
-            ip route add $(get_subnet $node_a_ip/$node_a_mask) via $node_b_server_ip
-            echo "Routing client"
-            ip route add $(get_subnet $node_c_ip/$node_c_mask) via $node_b_client_ip
-
             echo "Gateway is up"
          ;;
          # Client
@@ -69,6 +67,10 @@ case $1 in
             ip link add macvlan1 link eth0 type macvlan mode bridge
             ip address add dev macvlan1 $node_c_ip/$node_c_mask
             ip link set macvlan1 up
+
+            echo "Routing client"
+            ip route add $(get_subnet $node_a_ip/$node_a_mask) via $node_b_client_ip
+
             echo "node A with ip $node_c_ip/$node_c_mask is up"
          ;;
          *)
