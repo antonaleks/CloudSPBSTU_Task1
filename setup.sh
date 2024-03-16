@@ -89,7 +89,7 @@ case $1 in
          ;;
          POST)
             echo "Sending POST request"
-            curl -d "data=simpledata" -X POST http://$node_a_ip:$node_a_port
+            curl -X POST http://$node_a_ip:$node_a_port
          ;; 
          PUT)
             echo "Sending PUT request"
