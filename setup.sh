@@ -81,6 +81,21 @@ case $1 in
          ;;
       esac
       ;;
+   -t)
+      case $2 in
+         GET)
+            echo "Sending GET request"
+            curl http://$node_a_ip:$node_a_port
+         ;;
+         POST)
+            echo "Sending POST request"
+            curl -d "data=simpledata" -X POST http://$node_a_ip:$node_a_port
+         ;; 
+         PUT)
+            echo "Sending PUT request"
+            curl -X PUT http://$node_a_ip:$node_a_port
+         ;;
+      ;;
    *)
       echo "Help placeholder"
       echo "-l list settings"

@@ -1,9 +1,22 @@
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+# GET request
+@app.route('/', methods=['GET'])
+def get_request():
+    return 'This is a GET request'
 
-app.run(host='0.0.0.0', port=5000)
+# POST request
+@app.route('/', methods=['POST'])
+def post_request():
+    data = request.get_json()
+    return f'This is a POST request with data: {data}'
+
+# PUT request
+@app.route('/', methods=['PUT'])
+def put_request():
+    return 'This is a PUT request'
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
