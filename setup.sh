@@ -101,6 +101,7 @@ case $1 in
       echo "Help placeholder"
       echo "-l list settings"
       echo "-n <node> setup node"
+      echo "-t <GET|POST|PUT> send corresponding web request"
       echo "-h display this message"
       ;;
 esac
