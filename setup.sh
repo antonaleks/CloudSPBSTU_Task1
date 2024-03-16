@@ -95,6 +95,7 @@ case $1 in
             echo "Sending PUT request"
             curl -X PUT http://$node_a_ip:$node_a_port
          ;;
+      esac
       ;;
    *)
       echo "Help placeholder"
