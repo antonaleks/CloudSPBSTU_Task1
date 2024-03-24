@@ -44,18 +44,14 @@ POST
 [node3] (local) root@192.168.0.16 ~/LinuxPractice
 $ ./setup.sh -t POST
 Sending POST request
-<!doctype html>
-<html lang=en>
-<title>415 Unsupported Media Type</title>
-<h1>Unsupported Media Type</h1>
-<p>Did not attempt to load JSON data because the request Content-Type was not &#39;application/json&#39;.</p>
+This is a POST request with data: {'login': 'my_login', 'password': 'my_password'}
 ```
 PUT
 ```console
 [node3] (local) root@192.168.0.16 ~/LinuxPractice
 $ ./setup.sh -t PUT
 Sending PUT request
-This is a PUT request
+This is a PUT request with data: {'login': 'my_login', 'password': 'my_password'}
 ```
 
 Настройка IP адресов хранится в файле config.yml.
@@ -98,7 +94,7 @@ $ ./setup.sh -h
 
 `setup.sh`
 ```sh
-#!/bin/bash
+#!/usr/bin/env bash
 
 # https://stackoverflow.com/questions/5014632/how-can-i-parse-a-yaml-file-from-a-linux-shell-script
 function parse_yaml {
@@ -189,11 +185,11 @@ case $1 in
          ;;
          POST)
             echo "Sending POST request"
-            curl -X POST http://$node_a_ip:$node_a_port
+            curl -X POST http://$node_a_ip:$node_a_port -H 'Content-Type: application/json' -d '{"login":"my_login","password":"my_password"}'
          ;; 
          PUT)
             echo "Sending PUT request"
-            curl -X PUT http://$node_a_ip:$node_a_port
+            curl -X PUT http://$node_a_ip:$node_a_port -H 'Content-Type: application/json' -d '{"login":"my_login","password":"my_password"}'
          ;;
       esac
       ;;
@@ -227,7 +223,8 @@ def post_request():
 # PUT request
 @app.route('/', methods=['PUT'])
 def put_request():
-    return 'This is a PUT request'
+    data = request.get_json()
+    return f'This is a PUT request with data: {data}'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
@@ -301,7 +298,7 @@ WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://172.18.0.44:5000
 Press CTRL+C to quit
 192.168.9.100 - - [16/Mar/2024 18:16:42] "GET / HTTP/1.1" 200 -
-192.168.9.100 - - [16/Mar/2024 18:16:51] "POST / HTTP/1.1" 415 -
+192.168.9.100 - - [16/Mar/2024 18:16:51] "POST / HTTP/1.1" 200 -
 192.168.9.100 - - [16/Mar/2024 18:17:12] "PUT / HTTP/1.1" 200 -
 ```
 
@@ -364,13 +361,8 @@ Sending GET request
 This is a GET request[node3] (local) root@192.168.0.16 ~/LinuxPractice
 $ ./setup.sh -t POST
 Sending POST request
-<!doctype html>
-<html lang=en>
-<title>415 Unsupported Media Type</title>
-<h1>Unsupported Media Type</h1>
-<p>Did not attempt to load JSON data because the request Content-Type was not &#39;application/json&#39;.</p>
-[node3] (local) root@192.168.0.16 ~/LinuxPractice
+This is a POST request with data: {'login': 'my_login', 'password': 'my_password'}[node3] (local) root@192.168.0.16 ~/LinuxPractice
 $ ./setup.sh -t PUT
 Sending PUT request
-This is a PUT request[node3] (local) root@192.168.0.16 ~/LinuxPractice
+This is a PUT request with data: {'login': 'my_login', 'password': 'my_password'}[node3] (local) root@192.168.0.16 ~/LinuxPractice
 ```

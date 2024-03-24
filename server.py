@@ -16,7 +16,8 @@ def post_request():
 # PUT request
 @app.route('/', methods=['PUT'])
 def put_request():
-    return 'This is a PUT request'
+    data = request.get_json()
+    return f'This is a PUT request with data: {data}'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # https://stackoverflow.com/questions/5014632/how-can-i-parse-a-yaml-file-from-a-linux-shell-script
 function parse_yaml {
@@ -89,11 +89,11 @@ case $1 in
          ;;
          POST)
             echo "Sending POST request"
-            curl -X POST http://$node_a_ip:$node_a_port
+	    curl -X POST http://$node_a_ip:$node_a_port -H 'Content-Type: application/json' -d '{"login":"my_login","password":"my_password"}'
          ;; 
          PUT)
             echo "Sending PUT request"
-            curl -X PUT http://$node_a_ip:$node_a_port
+	    curl -X PUT http://$node_a_ip:$node_a_port -H 'Content-Type: application/json' -d '{"login":"my_login","password":"my_password"}'
          ;;
       esac
       ;;
