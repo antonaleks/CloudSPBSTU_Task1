@@ -1,0 +1,19 @@
+# Server
+node_a:
+  ip: 192.168.8.10
+  mask: 24
+  port: 5000
+
+# Gateway
+node_b:
+  server:
+    ip: 192.168.8.1
+    mask: 24
+  client:
+    ip: 192.168.9.10
+    mask: 24
+
+# Client
+node_c:
+  ip: 192.168.9.100
+  mask: 24
