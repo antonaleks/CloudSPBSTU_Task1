@@ -45,13 +45,13 @@
 1. Вводим в него следующее содержимое:<br>
 ```python
 from flask import Flask
-
+<br><br>
 app = Flask(__name__)
-
+<br><br>
 @app.route("/")
 def hello_world():
     return "<p>Hello, World!</p>"
-
+<br><br>
 app.run(host='192.168.4.10', port=5000)
 ```
 1. Запускаем приложение<br>```sudo python3 app.py```<p align="center"><img width=60% src = "img/server.png"></p>
