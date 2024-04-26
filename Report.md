@@ -55,7 +55,8 @@ def hello_world():
 app.run(host='192.168.4.10', port=5000)
 ```
 <br>
-Запускаем приложение<br>```sudo python3 app.py```<p align="center"><img width=60% src = "img/server.png"></p>
+<b>Запускаем приложение</b><br> ```sudo python3 app.py``` <p align="center"><img width=60% src = "img/server.png"></p>
+
 ### Настройка роутера
 1. Делаем клонирование чистой системы. Для этого нажимаем правой кнопкой по нашей девстенной тачке и выбираем "Клонировать"<p align="center"><img width=60% src = "img/submenu_clone.png"></p>
 1. В появившемся окне "Клонировать виртуальную машину" в поле "Имя:" пишем "UbunuB", а в поле "Путь:" выбираем, куда будет склонирована виртуальная тачка и жмём "Далее".<p align="center"><img width=60% src = "img/clone.png"></p>
