@@ -9,6 +9,18 @@
 
 Виртуальные машины были созданы в PlayWithDocker
 
+## Выполненная работа
+Развернуты 3 виртуальные машины:
+
+Машина А:
+Развернут http сервер на python. Настроена маршрутизация в подсеть С.
+
+Машина B:
+Сервер маршрутизатор, настроны два адаптера. + настроен фаервол
+
+Машина С:
+Клиент. Настроена маршрутизация в подсеть С. Сделаны get post put запросы, для прверки, проверен фаервол
+
 ## Как использовать
 - Клонировать репозиторий `git clone https://github.com/Andrey-S23/LinuxPractice.git`
 - Отредактировать файл env.sh
@@ -37,23 +49,26 @@
 [node1] (local) root@192.168.0.18 ~
 $ git clone https://github.com/Andrey-S23/LinuxPractice.git
 Cloning into 'LinuxPractice'...
-remote: Enumerating objects: 111, done.
-remote: Counting objects: 100% (85/85), done.
-remote: Compressing objects: 100% (52/52), done.
-remote: Total 111 (delta 40), reused 63 (delta 21), pack-reused 26
-Receiving objects: 100% (111/111), 46.82 KiB | 3.12 MiB/s, done.
-Resolving deltas: 100% (44/44), done.
-[node1] (local) root@192.168.0.18 ~
-$ sh setupA.sh
-sh: can't open 'setupA.sh': No such file or directory
+remote: Enumerating objects: 55, done.
+remote: Counting objects: 100% (30/30), done.
+remote: Compressing objects: 100% (16/16), done.
+remote: Total 55 (delta 12), reused 26 (delta 11), pack-reused 25
+Receiving objects: 100% (55/55), 45.04 KiB | 3.75 MiB/s, done.
+Resolving deltas: 100% (16/16), done.
 [node1] (local) root@192.168.0.18 ~
 $ cd LinuxPractice/
 [node1] (local) root@192.168.0.18 ~/LinuxPractice
 $ sh setupA.sh
 Setup env ...
-Setup links ...
-192.168.6.10/24 is up
+Setup env success
+
+Setup 192.168.6.10 ...
+192.168.6.10/24 is up success
+
+Setup routing from 192.168.6.100 to 192.168.6.1...
 ip: an inet address is expected rather than "192.168.6.1/24"
+Setup routing success
+
 Setup venv...
 Collecting flask (from -r ./requirements.txt (line 1))
   Obtaining dependency information for flask from https://files.pythonhosted.org/packages/61/80/ffe1da13ad9300f87c93af113edd0638c75138c42a0994becfacac078c06/flask-3.0.3-py3-none-any.whl.metadata
@@ -77,30 +92,31 @@ Collecting MarkupSafe>=2.0 (from Jinja2>=3.1.2->flask->-r ./requirements.txt (li
   Obtaining dependency information for MarkupSafe>=2.0 from https://files.pythonhosted.org/packages/f8/81/56e567126a2c2bc2684d6391332e357589a96a76cb9f8e5052d85cb0ead8/MarkupSafe-2.1.5-cp311-cp311-musllinux_1_1_x86_64.whl.metadata
   Downloading MarkupSafe-2.1.5-cp311-cp311-musllinux_1_1_x86_64.whl.metadata (3.0 kB)
 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 101.7/101.7 kB 18.3 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 101.7/101.7 kB 15.7 MB/s eta 0:00:00
 Downloading blinker-1.8.2-py3-none-any.whl (9.5 kB)
 Downloading click-8.1.7-py3-none-any.whl (97 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 97.9/97.9 kB 28.9 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 97.9/97.9 kB 23.2 MB/s eta 0:00:00
 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
 Downloading jinja2-3.1.4-py3-none-any.whl (133 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.3/133.3 kB 32.5 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.3/133.3 kB 25.7 MB/s eta 0:00:00
 Downloading werkzeug-3.0.3-py3-none-any.whl (227 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 227.3/227.3 kB 31.8 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 227.3/227.3 kB 33.8 MB/s eta 0:00:00
 Downloading MarkupSafe-2.1.5-cp311-cp311-musllinux_1_1_x86_64.whl (33 kB)
 Installing collected packages: MarkupSafe, itsdangerous, click, blinker, Werkzeug, Jinja2, flask
 Successfully installed Jinja2-3.1.4 MarkupSafe-2.1.5 Werkzeug-3.0.3 blinker-1.8.2 click-8.1.7 flask-3.0.3 itsdangerous-2.2.0
 
 [notice] A new release of pip is available: 23.2.1 -> 24.0
 [notice] To update, run: python -m pip install --upgrade pip
+Setup venv success
+
 RunServer...
  * Serving Flask app 'app'
  * Debug mode: off
 WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
  * Running on all addresses (0.0.0.0)
  * Running on http://127.0.0.1:5000
- * Running on http://172.18.0.5:5000
+ * Running on http://172.18.0.35:5000
 Press CTRL+C to quit
-
 ```
 ### Сервер B
 ```
@@ -115,35 +131,44 @@ Press CTRL+C to quit
 [node2] (local) root@192.168.0.17 ~
 $ git clone https://github.com/Andrey-S23/LinuxPractice.git
 Cloning into 'LinuxPractice'...
-remote: Enumerating objects: 111, done.
-remote: Counting objects: 100% (85/85), done.
-remote: Compressing objects: 100% (51/51), done.
-remote: Total 111 (delta 40), reused 64 (delta 22), pack-reused 26
-Receiving objects: 100% (111/111), 46.82 KiB | 4.68 MiB/s, done.
-Resolving deltas: 100% (44/44), done.
+remote: Enumerating objects: 55, done.
+remote: Counting objects: 100% (30/30), done.
+remote: Compressing objects: 100% (16/16), done.
+remote: Total 55 (delta 12), reused 26 (delta 11), pack-reused 25
+Receiving objects: 100% (55/55), 45.41 KiB | 3.03 MiB/s, done.
+Resolving deltas: 100% (16/16), done.
+[node2] (local) root@192.168.0.17 ~
+$ ch LinuxPractice/
+bash: ch: command not found
 [node2] (local) root@192.168.0.17 ~
 $ cd LinuxPractice/
 [node2] (local) root@192.168.0.17 ~/LinuxPractice
 $ sh setupB.sh
 Setup env ...
-Setup link  ...
-Setup link  ...
-Installation tcpdump
+Setup env success
 
+Setup 192.168.6.1 ...
+192.168.6.1/24 is up success
+
+Setup 192.168.6.11 ...
+192.168.6.11/24 is up success
+
+Installation tcpdump
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.18/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.18/community/x86_64/APKINDEX.tar.gz
 (1/2) Installing libpcap (1.10.4-r1)
 (2/2) Installing tcpdump (4.99.4-r1)
 Executing busybox-1.36.1-r2.trigger
 OK: 469 MiB in 164 packages
+Installation tcpdump success
+
 Configurate tcpdump (only http throw 5000 port)
 tcpdump: data link type LINUX_SLL2
 tcpdump: listening on any, link-type LINUX_SLL2 (Linux cooked v2), snapshot length 262144 bytes
-
 ```
 ### Сервер C
 ```
-##############################################################
+###############################################################
 #                          WARNING!!!!                        #
 # This is a sandbox environment. Using personal credentials   #
 # is HIGHLY! discouraged. Any consequences of doing so are    #
@@ -154,19 +179,24 @@ tcpdump: listening on any, link-type LINUX_SLL2 (Linux cooked v2), snapshot leng
 [node3] (local) root@192.168.0.16 ~
 $ git clone https://github.com/Andrey-S23/LinuxPractice.git
 Cloning into 'LinuxPractice'...
-remote: Enumerating objects: 111, done.
-remote: Counting objects: 100% (85/85), done.
-remote: Compressing objects: 100% (51/51), done.
-remote: Total 111 (delta 40), reused 64 (delta 22), pack-reused 26
-Receiving objects: 100% (111/111), 46.82 KiB | 5.85 MiB/s, done.
-Resolving deltas: 100% (44/44), done.
+remote: Enumerating objects: 55, done.
+remote: Counting objects: 100% (30/30), done.
+remote: Compressing objects: 100% (16/16), done.
+remote: Total 55 (delta 12), reused 26 (delta 11), pack-reused 25
+Receiving objects: 100% (55/55), 45.04 KiB | 9.01 MiB/s, done.
+Resolving deltas: 100% (16/16), done.
 [node3] (local) root@192.168.0.16 ~
 $ cd LinuxPractice/
 [node3] (local) root@192.168.0.16 ~/LinuxPractice
 $ sh setupC.sh
 Setup env ...
-Setup links ...
+Setup 192.168.6.100 ...
+192.168.6.100/24 is up success
+
+Setup routing from 192.168.6.10 to 192.168.6.1...
 ip: an inet address is expected rather than "192.168.6.1/24"
+Setup routing success
+
 [node3] (local) root@192.168.0.16 ~/LinuxPractice
 $ sh post.sh
 POST: None replaced andrei[node3] (local) root@192.168.0.16 ~/LinuxPractice
