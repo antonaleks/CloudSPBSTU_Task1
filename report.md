@@ -15,7 +15,7 @@
 Для подключения к виртуальным машинам по SSH необходимо сгененрировать ключ (см. рис. 2).
  
 <p align="center">
-<img width=100% src = "pics/2.png">
+<img width=100% src = "pics/2.PNG">
 </p>
 
 <p align="center">
@@ -54,7 +54,7 @@ Linux С : `192.168.9.100 / 24` (см. рис. 5)
 <!-------------------------------------------------------->
 
 <p align="center">
-<img width=100% src = "pics/LinA.png">
+<img width=100% src = "pics/LinA.PNG">
 </p>
 
 <p align="center">
@@ -64,7 +64,7 @@ Linux С : `192.168.9.100 / 24` (см. рис. 5)
 <!-------------------------------------------------------->
 
 <p align="center">
-<img width=100% src = "pics/LinB1.png">
+<img width=100% src = "pics/LinB1.PNG">
 </p>
 
 <p align="center">
@@ -74,7 +74,7 @@ Linux С : `192.168.9.100 / 24` (см. рис. 5)
 <!-------------------------------------------------------->
 
 <p align="center">
-<img width=100% src = "pics/LinB2.png">
+<img width=100% src = "pics/LinB2.PNG">
 </p>
 
 <p align="center">
@@ -84,7 +84,7 @@ Linux С : `192.168.9.100 / 24` (см. рис. 5)
 <!-------------------------------------------------------->
 
 <p align="center">
-<img width=100% src = "pics/LinC.png">
+<img width=100% src = "pics/LinC.PNG">
 </p>
 
 <p align="center">
@@ -97,7 +97,7 @@ Linux С : `192.168.9.100 / 24` (см. рис. 5)
 
 <!-------------------------------------------------------->
 <p align="center">
-<img width=60% src = "pics/3.png">
+<img width=60% src = "pics/3.PNG">
 </p>
 
 <p align="center">
@@ -108,7 +108,7 @@ Linux С : `192.168.9.100 / 24` (см. рис. 5)
 
 <!-------------------------------------------------------->
 <p align="center">
-<img width=60% src = "pics/4.png">
+<img width=60% src = "pics/4.PNG">
 </p>
 
 <p align="center">
@@ -127,14 +127,14 @@ Linux С : `192.168.9.100 / 24` (см. рис. 5)
 `tcpdump -i any -s 0 'tcp port http' -w /tmp/http.cap and 'port 5000'`
 
 <p align="center">
-<img width=100% src = "pics/5.png">
+<img width=100% src = "pics/5.PNG">
 </p>
 
 После этого, послав запрос с Linux A на Linux C, через порт, например, 8080, получим следующее:
 
 <!-------------------------------------------------------->
 <p align="center">
-<img width=100% src = "pics/6.png">
+<img width=100% src = "pics/6.PNG">
 </p>
 
 <p align="center">
@@ -149,7 +149,7 @@ Linux С : `192.168.9.100 / 24` (см. рис. 5)
 
 <!-------------------------------------------------------->
 <p align="center">
-<img width=100% src = "pics/7.png">
+<img width=100% src = "pics/7.PNG">
 </p>
 
 <p align="center">
@@ -196,7 +196,7 @@ EOF
 Запущенный сервер выглядит так: 
 <!-------------------------------------------------------->
 <p align="center">
-<img width=100% src = "pics/8.png">
+<img width=100% src = "pics/8.PNG">
 </p>
 
 <p align="center">
@@ -206,7 +206,7 @@ EOF
 
 <!-------------------------------------------------------->
 <p align="center">
-<img width=90% src = "pics/9.png">
+<img width=90% src = "pics/9.PNG">
 </p>
 
 <p align="center">
@@ -217,7 +217,7 @@ EOF
 
 <!-------------------------------------------------------->
 <p align="center">
-<img width=90% src = "pics/10.png">
+<img width=90% src = "pics/10.PNG">
 </p>
 
 <p align="center">
