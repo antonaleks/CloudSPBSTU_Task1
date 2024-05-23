@@ -316,7 +316,7 @@ tcpdump -i any -s 0 'tcp port http' -w /tmp/http.cap and 'port 5000'
 *Скрипт конфигурации виртуальной машины С*
 ```sh
 #!/bin/bash
-# Linux РЎ
+# Linux C
 
 echo -e "Starting the first MACVLAN installation\n"
 
