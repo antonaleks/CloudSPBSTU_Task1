@@ -4,7 +4,7 @@
 С помощью возможностей `https://labs.play-with-docker.com/` создаем три виртуальные машины при помощи нажатия `ADD NEW INSTANCE`.
 
 <p align="center">
-<img width=60% src = "pics/1.png">
+<img width=60% src = "pics/1.PNG">
 </p>
 
 <p align="center">
