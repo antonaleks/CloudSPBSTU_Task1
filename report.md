@@ -199,9 +199,3 @@ curl -X POST "http://192.168.20.10:5000?sent=modern"
 echo "PUT-request"
 curl -X PUT "http://192.168.20.10:5000?sent=very modern"
 ```
-
-## Конец
-
-<p align="center">
-<img width=100% src="images/eralash.jpeg">
-</p>
