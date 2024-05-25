@@ -2,9 +2,11 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
+data = {"username":"", "password":""}
+
 @app.route("/")
 def get_():
-    return f"Hello, world!\n"
+    return data
 
 @app.route("/",methods = ['POST'])
 def post():
