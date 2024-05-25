@@ -121,7 +121,7 @@ curl 192.168.16.10:5000
 ```
 
 <p align="center">
-<img width=100% src="images/scr_GET.png">
+<img width=100% src="images/scr_GET1.png">
 Рисунок 10 - Проверка работы GET запроса
 </p>
 
@@ -138,7 +138,7 @@ curl -X POST http://192.168.16.10:5000?sent=modern
 ```
 
 <p align="center">
-<img width=100% src="images/scr_POST.png">
+<img width=100% src="images/scr_POST1.png">
 Рисунок 12 - Проверка работы POST запроса
 </p>
 
@@ -154,7 +154,7 @@ curl -X PUT http://192.168.16.10:5000?sent=modern
 ```
 
 <p align="center">
-<img width=100% src="images/scr_PUT.png">
+<img width=100% src="images/scr_PUT1.png">
 Рисунок 14 - Проверка работы PUT запроса
 </p>
 
