@@ -6,14 +6,23 @@ app = Flask(__name__)
 def get_():
     return f"Hello, world!\n"
 
-@app.route("/", methods = ['POST'])
-def post_():
-    message = request.args.get('message')
-    return f"Message received: {message}\n"
+@app.route("/",methods = ['POST'])
+def post():
+    data_json=request.get_json()
+    if data_json is None:
+        return 'Invalid JSON data', 400
 
-@app.route("/", methods = ['PUT'])
-def put_():
-    res = f"{request.args.get('message')} - by PUT\n"
-    return res
+    data['username']=data_json['username']
+    data['password']=data_json['password']
+    print(f"Data received {data_json}")
+
+    return [data['username'], data['password']]
+
+@app.route("/", methods =['PUT'])
+def put():
+    str = request.args.get('password')
+    print(f"New password received {str}")
+    data['password'] = str
+    return [data['username'], data['password']]
 
 app.run(host='0.0.0.0', port=5000)
