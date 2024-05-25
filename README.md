@@ -47,8 +47,11 @@
 
 # Web server
 Добавим файл с нашим сервером, в наш контейнер А
+
 ![image](https://github.com/BilioboMain/LinuxPractice_2/assets/53617626/bf839fa3-f515-4a98-bed3-bd2920876bc3)
+
 И запустим его
+
 ![image](https://github.com/BilioboMain/LinuxPractice_2/assets/53617626/c78e608c-93a9-42ca-8e57-5e514707353b)
 
 Теперь проверим работу наших серверов отправим все три запроса с сервера С
@@ -74,6 +77,6 @@
 Далее запустив sudo ./server_b.sh на нашем втором сервере мы получим 
 ![image](https://github.com/BilioboMain/LinuxPractice/assets/53617626/488c414b-dfed-4eef-8bf5-429999140c0a)
 
-После запуска скрипта на сервере C
+После запуска скрипта на сервере C получим следующее сообщение, значит сервера работают корректно
+
 ![image](https://github.com/BilioboMain/LinuxPractice/assets/53617626/f9477ac9-1763-460e-a63e-f314b0f3bc33)
-получим следующее сообщение, значит сервера работают корректно
