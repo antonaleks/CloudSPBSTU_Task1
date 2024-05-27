@@ -124,7 +124,7 @@ Linux С : `192.168.3.100 / 24` (см. рис. 5)
 
 <!-------------------------------------------------------->
 <p align="center">
-<img width=100% src = "imgs/flask_5001.PNG">
+<img width=100% src = "imgs/flask_5001.png">
 </p>
 
 <p align="center">
